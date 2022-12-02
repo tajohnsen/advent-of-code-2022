@@ -61,20 +61,14 @@ score2_table = dict(
 )
 
 
-def score1(them: str, us: str) -> int:
-    return score1_table[them][us]
-
-
-def score2(them: str, us: str) -> int:
-    return score2_table[them][us]
-
-
 def main():
     with open('input', 'r') as in_file:
         data = in_file.readlines()
 
-    print(list(accumulate(starmap(score1, (choice.split(' ') for choice in map(lambda x: x.strip(), iter(data))))))[-1])
-    print(list(accumulate(starmap(score2, (choice.split(' ') for choice in map(lambda x: x.strip(), iter(data))))))[-1])
+    print(list(accumulate(starmap(
+        lambda x, y: score1_table[x][y], (choice.split(' ') for choice in map(lambda x: x.strip(), iter(data))))))[-1])
+    print(list(accumulate(starmap(
+        lambda x, y: score2_table[x][y], (choice.split(' ') for choice in map(lambda x: x.strip(), iter(data))))))[-1])
 
 
 if __name__ == '__main__':
