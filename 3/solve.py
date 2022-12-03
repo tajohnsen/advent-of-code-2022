@@ -19,7 +19,7 @@ total2 = 0
 stripped = map(lambda i: i.strip(), data)
 while True:
     try:
-        x, y, z = list(islice(stripped, 0, 3))
+        x, y, z = islice(stripped, 0, 3)
     except ValueError:
         break
     for a in x:
