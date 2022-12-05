@@ -18,6 +18,11 @@ class Ranges(object):
             or \
             (self.ranges[1].lower >= self.ranges[0].lower and self.ranges[1].upper <= self.ranges[0].upper)
 
+    def any_overlap(self) -> bool:
+        return (self.ranges[0].upper >= self.ranges[1].lower and self.ranges[0].lower <= self.ranges[1].upper) \
+            or \
+            (self.ranges[1].upper >= self.ranges[0].lower and self.ranges[1].lower <= self.ranges[0].upper)
+
 
 with open("input.txt") as in_file:
     data = in_file.readlines()
@@ -26,5 +31,11 @@ with open("input.txt") as in_file:
 stripped = map(lambda x: x.strip(), data)
 
 filtered = filter(lambda x: Ranges(x).fully_contained(), stripped)
+
+print(len(list(filtered)))
+
+stripped = map(lambda x: x.strip(), data)
+
+filtered = filter(lambda x: Ranges(x).any_overlap(), stripped)
 
 print(len(list(filtered)))
