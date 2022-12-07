@@ -40,6 +40,11 @@ curl 'https://adventofcode.com/2022/day/'${DAY}'/input' \
   --compressed > input.txt || echo Couldn\'t download the day ${DAY} input\!
 
 if [[ ! -e "solve.py" ]]; then
-  echo 'with open("input.txt", "r") as in_file:
-    data = in_file.read()' > solve.py
+  echo 'def main():
+    with open("input.txt", "r") as in_file:
+        data = in_file.readlines()
+
+
+if __name__ == "__main__":
+    main()' > solve.py
 fi
