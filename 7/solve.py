@@ -28,13 +28,15 @@ $ ls
 def main():
     global curr_dir
     with open("input.txt", "r") as in_file:
-        data = in_file.readlines()
+        data = in_file.read()
+        data = data.split('\n')
+        data = filter(lambda x: x != '', data)
 
-    data = map(lambda x: x.strip(), data)
+    # data = map(lambda x: x.strip(), data)
 
     directories = dict()
 
-    for line in d:
+    for line in data:
         # print(line)
         if line[:4] == "$ cd":
             change_dir(line)
@@ -50,16 +52,29 @@ def main():
         else:
             directories[curr_dir] += get_file_size(line)
 
-    # print(directories)
-    # print(find_all_sizes(directories))
+    from pprint import pprint
+    # pprint(directories)
+    # pprint(find_all_sizes(directories))
     ts = find_all_sizes(directories)
 
     solution1 = 0
     for value in ts.values():
-        if value < 100000:
+        if value <= 100000:
             solution1 += value
 
     print(solution1)
+
+    total_system = 70000000
+    total_used = ts.get('')
+    needs = 30000000
+    currently_free = total_system - total_used
+    # print(currently_free)
+    need = needs - currently_free
+    # print(need)
+    filtered = filter(lambda x: x > need, ts.values())
+    print(min(filtered))
+
+
 
 
 def change_dir(cmd: str):
@@ -90,11 +105,19 @@ def find_all_sizes(dirs: dict):
                 total_sizes[''] = 0
             total_sizes[''] += dirs[dir]
             continue
-        for key in dir.split('/'):
-            if total_sizes.get(key) is None:
-                total_sizes[key] = 0
-            # print(total_sizes, key, dirs[dir])
-            total_sizes[key] += dirs[dir]
+        splitted = dir.split('/')
+        base = ''
+        for key in splitted:
+            base += key
+            if total_sizes.get(base) is None:
+                total_sizes[base] = 0
+            total_sizes[base] += dirs[dir]
+            base += "/"
+
+        # for key in dir.split('/'):
+        #     if total_sizes.get(key) is None:
+        #         total_sizes[key] = 0
+        #     total_sizes[key] += dirs[dir]
     return total_sizes
 
 
