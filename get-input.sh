@@ -26,8 +26,8 @@ curl 'https://adventofcode.com/2022/day/'${DAY}'/input' \
   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \
   -H 'accept-language: en-US,en;q=0.9' \
   -H 'cache-control: max-age=0' \
-  -H "$(cat ${SCRIPT_DIR}/cookie.txt)" \
-  -H 'referer: https://adventofcode.com/2022/day/'${DAY} \
+  -H "$(cat "${SCRIPT_DIR}"/cookie.txt)" \
+  -H 'referer: https://adventofcode.com/2022/day/'"${DAY}" \
   -H 'sec-ch-ua: "Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"' \
   -H 'sec-ch-ua-mobile: ?0' \
   -H 'sec-ch-ua-platform: "Windows"' \
@@ -37,7 +37,7 @@ curl 'https://adventofcode.com/2022/day/'${DAY}'/input' \
   -H 'sec-fetch-user: ?1' \
   -H 'upgrade-insecure-requests: 1' \
   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36' \
-  --compressed > input.txt || echo Couldn\'t download the day ${DAY} input\!
+  --compressed > input.txt || echo Couldn\'t download the day "${DAY}" input\!
 
 if [[ ! -e "solve.py" ]]; then
   echo 'def main():
