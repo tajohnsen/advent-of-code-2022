@@ -42,7 +42,7 @@ curl 'https://adventofcode.com/2022/day/'${DAY}'/input' \
 if [[ ! -e "solve.py" ]]; then
   echo 'def main():
     with open("input.txt", "r") as in_file:
-        data = in_file.readlines()
+        data = map(lambda x: x.rstrip(), in_file.readlines())
 
 
 if __name__ == "__main__":
