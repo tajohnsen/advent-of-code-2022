@@ -28,7 +28,7 @@ def process_op(op: str, x: int):
 
 
 def draw(index, value):
-    adjusted = (value % 40) - 1
+    adjusted = (value % 40) - 1  # make index 0
     if index % 40 in list(range(adjusted, adjusted+3)):
         print('#', end='')
     else:
